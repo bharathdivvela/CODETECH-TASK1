@@ -1,0 +1,30 @@
+import re
+
+def check_password_strength(password):
+    # Minimum length check
+    if len(password) < 8:
+        return "Password is too short. It should be at least 8 characters long."
+    
+    # Check for both lowercase and uppercase letters
+    if not re.search(r"[a-z]", password) or not re.search(r"[A-Z]", password):
+        return "Password should include both lowercase and uppercase letters."
+    
+    # Check for digits
+    if not re.search(r"\d", password):
+        return "Password should include numbers."
+    
+    # Check for special characters
+    if not re.search(r"[ !@#$%^&*()_+{}\[\]:;<>,.?/~\\-]", password):
+        return "Password should include special characters (e.g., !@#$%^&*()_-)."
+    
+    # Check for uniqueness
+    if len(set(password)) < len(password):
+        return "Password should have all unique characters."
+    
+    return "Password is strong."
+
+# Example usage:
+if __name__ == "__main__":
+    password = input("Enter your password: ")
+    strength_result = check_password_strength(password)
+    print(strength_result)
